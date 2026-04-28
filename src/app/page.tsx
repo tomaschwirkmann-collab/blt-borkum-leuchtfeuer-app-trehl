@@ -1,279 +1,271 @@
-import Link from 'next/link'
-import { Menu, MapPin, Trophy, Sparkles, Users, MessageSquare, Gift, Check, Star, ChevronDown } from 'lucide-react'
+```typescript
+'use client'
 
-export default function Page() {
+import { useState } from 'react'
+import { Map, Search, Zap, Gift, Brain, TrendingUp, MessageSquare, Star } from 'lucide-react'
+
+export default function Home() {
+  const [email, setEmail] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitted(true)
+    setTimeout(() => setSubmitted(false), 3000)
+  }
+
   return (
     <div className="min-h-screen bg-white">
-      <header className="border-b border-gray-100 sticky top-0 bg-white/80 backdrop-blur-md z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1B4F72] to-[#27AE60] flex items-center justify-center">
-              <MapPin className="w-6 h-6 text-white" />
-            </div>
-            <span className="font-bold text-xl text-[#1B4F72]">BLT Borkum</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="#problem" className="text-gray-600 hover:text-[#1B4F72] transition">Problem</Link>
-            <Link href="#solution" className="text-gray-600 hover:text-[#1B4F72] transition">Lösung</Link>
-            <Link href="#features" className="text-gray-600 hover:text-[#1B4F72] transition">Features</Link>
-            <Link href="#pricing" className="text-gray-600 hover:text-[#1B4F72] transition">Preise</Link>
-          </nav>
-          <button className="md:hidden">
-            <Menu className="w-6 h-6 text-gray-600" />
+      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <div className="text-2xl font-bold text-[#1B4F72]">BLT Borkum</div>
+          <button className="bg-[#27AE60] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#229954] transition-colors">
+            Demo anfragen
           </button>
         </div>
-      </header>
+      </nav>
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#1B4F72] via-[#1B4F72] to-[#27AE60] text-white">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full filter blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#27AE60] rounded-full filter blur-3xl"></div>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <span className="w-2 h-2 bg-[#27AE60] rounded-full animate-pulse"></span>
-              <span className="text-sm font-medium">Native App für Inseltourismus</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Verlorene Gäste, verpasste Umsätze, keine Bindung?
-            </h1>
-            <p className="text-xl sm:text-2xl mb-4 text-white/90 leading-relaxed">
-              Verwandeln Sie Borkum-Besucher in loyale Stammgäste
-            </p>
-            <p className="text-lg mb-8 text-white/80 leading-relaxed">
-              Mit der BLT Borkum App bekommen Ihre Gäste eine personalisierte Insel-Erfahrung: interaktive Karte, Gamification, KI-Concierge und ein Loyalty-Programm, das lokale Betriebe stärkt.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#cta" className="inline-flex items-center justify-center px-8 py-4 bg-[#27AE60] text-white font-semibold rounded-xl hover:bg-[#229954] transition shadow-lg hover:shadow-xl">
-                Kostenlos starten
-              </a>
-              <a href="#features" className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl hover:bg-white/20 transition border border-white/20">
-                Features entdecken
-              </a>
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative rounded-3xl overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1B4F72] via-[#2E86AB] to-[#27AE60]"></div>
+            <div className="relative px-8 py-20 sm:px-16 sm:py-32 text-center">
+              <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6 leading-tight">
+                300.000 Gäste suchen.<br />Sie finden nicht.
+              </h1>
+              <p className="text-xl sm:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
+                Die erste KI-gestützte Gäste-App, die Borkum-Urlauber von Suchstress befreit – mit personalisiertem Concierge, Gamification und echten Wiederkehr-Anreizen.
+              </p>
+              <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="ihre.email@beispiel.de"
+                  required
+                  className="flex-1 px-6 py-4 rounded-lg text-gray-900 text-lg focus:outline-none focus:ring-4 focus:ring-[#27AE60]/50"
+                />
+                <button
+                  type="submit"
+                  className="bg-[#27AE60] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#229954] transition-colors whitespace-nowrap"
+                >
+                  Jetzt starten
+                </button>
+              </form>
+              {submitted && (
+                <div className="mt-4 text-white font-semibold">
+                  ✓ Vielen Dank! Wir melden uns in Kürze.
+                </div>
+              )}
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
       </section>
 
-      <section id="problem" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1B4F72] mb-4">
-              Die Herausforderungen im Inseltourismus
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Touristen kennen die Probleme — lokale Betriebe spüren die Folgen
-            </p>
-          </div>
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl font-bold text-center text-[#1B4F72] mb-4">
+            Das Problem heute
+          </h2>
+          <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
+            Ihre Gäste verbringen die ersten 2 Urlaubstage mit Planung statt Entspannung
+          </p>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition border border-gray-100">
-              <div className="w-14 h-14 rounded-xl bg-red-100 flex items-center justify-center mb-6">
-                <MapPin className="w-7 h-7 text-red-600" />
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                <Search className="w-8 h-8 text-red-600" />
               </div>
-              <h3 className="text-xl font-bold text-[#1B4F72] mb-3">
-                Orientierungslosigkeit
-              </h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Suche-Anstrengung</h3>
               <p className="text-gray-600 leading-relaxed">
-                Gäste verlieren sich in generischen Google Maps, verpassen lokale Geheimtipps und fühlen sich überfordert von der Fülle an Optionen ohne persönliche Empfehlungen.
+                Gäste durchforsten 5+ Websites, rufen die Touristinfo an und fragen im Hotel nach – nur um ein kinderfreundliches Restaurant bei Regenwetter zu finden.
               </p>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition border border-gray-100">
-              <div className="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center mb-6">
-                <Users className="w-7 h-7 text-orange-600" />
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6">
+                <Zap className="w-8 h-8 text-orange-600" />
               </div>
-              <h3 className="text-xl font-bold text-[#1B4F72] mb-3">
-                Keine Gästebindung
-              </h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Reizüberflutung</h3>
               <p className="text-gray-600 leading-relaxed">
-                Nach dem Urlaub verschwindet der Gast spurlos. Keine Möglichkeit für Follow-ups, keine Anreize für Wiederbesuche, kein messbarer ROI aus Tourismusmarketing.
+                150+ Aktivitäten, 40+ Restaurants, wechselnde Gezeiten – ohne Filter fühlt sich jeder Urlaubstag wie eine Entscheidungs-Schlacht an.
               </p>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition border border-gray-100">
-              <div className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center mb-6">
-                <Gift className="w-7 h-7 text-purple-600" />
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                <TrendingUp className="w-8 h-8 text-purple-600" />
               </div>
-              <h3 className="text-xl font-bold text-[#1B4F72] mb-3">
-                Fragmentierte Angebote
-              </h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Aktivitätsplanung</h3>
               <p className="text-gray-600 leading-relaxed">
-                Rabatte, Events und Insider-Tipps erreichen Touristen nicht rechtzeitig. Lokale Betriebe kämpfen um Sichtbarkeit gegen große Plattformen mit hohen Provisionen.
+                Tide passt nicht zur Strandwanderung, Vogelschutzgebiet gesperrt, Wunsch-Restaurant ausgebucht – spontan umplanen ist ohne Live-Daten unmöglich.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="solution" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-[#27AE60]/10 text-[#27AE60] px-4 py-2 rounded-full mb-6 font-semibold">
-                <Sparkles className="w-4 h-4" />
-                Der Unterschied
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl font-bold text-center text-[#1B4F72] mb-16">
+            Warum bestehende Lösungen scheitern
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="p-4 text-left font-bold text-gray-900 border-b-2 border-gray-300">Kriterium</th>
+                  <th className="p-4 text-center font-bold text-gray-900 border-b-2 border-gray-300">Kurkarten-App</th>
+                  <th className="p-4 text-center font-bold text-gray-900 border-b-2 border-gray-300">Print-Reiseführer</th>
+                  <th className="p-4 text-center font-bold text-[#27AE60] border-b-2 border-[#27AE60]">BLT Borkum App</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-200">
+                  <td className="p-4 font-semibold text-gray-900">Personalisierte Empfehlungen</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-[#27AE60] text-xl">✓</td>
+                </tr>
+                <tr className="border-b border-gray-200 bg-gray-50">
+                  <td className="p-4 font-semibold text-gray-900">Echtzeit-Daten (Tide, Wetter)</td>
+                  <td className="p-4 text-center text-orange-600">Teilweise</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-[#27AE60] text-xl">✓</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="p-4 font-semibold text-gray-900">Loyalty-Programm</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-[#27AE60] text-xl">✓</td>
+                </tr>
+                <tr className="border-b border-gray-200 bg-gray-50">
+                  <td className="p-4 font-semibold text-gray-900">KI-Concierge</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-[#27AE60] text-xl">✓</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="p-4 font-semibold text-gray-900">Gamification & Challenges</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-[#27AE60] text-xl">✓</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="p-4 font-semibold text-gray-900">B2B-Analytics für Partner</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-[#27AE60] text-xl">✓</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl font-bold text-center text-[#1B4F72] mb-4">
+            Funktionen, die begeistern
+          </h2>
+          <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
+            Entwickelt für Urlaubsgäste – optimiert für Wiederkehr
+          </p>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="flex gap-6">
+              <div className="flex-shrink-0">
+                <div className="w-16 h-16 bg-[#1B4F72] rounded-2xl flex items-center justify-center">
+                  <Brain className="w-8 h-8 text-white" />
+                </div>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#1B4F72] mb-6">
-                Eine App, die Gäste begeistert und Betriebe stärkt
-              </h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Während andere Lösungen nur digitale Visitenkarten oder generische Stadtführer bieten, schafft BLT Borkum ein vernetztes Ökosystem:
-              </p>
-              <div className="space-y-4">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#27AE60]/10 flex items-center justify-center">
-                    <Check className="w-5 h-5 text-[#27AE60]" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-[#1B4F72] mb-1">Native App-Erfahrung</h4>
-                    <p className="text-gray-600">Push-Benachrichtigungen, Offline-Karten, schnelle Performance — keine mobile Website</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#27AE60]/10 flex items-center justify-center">
-                    <Check className="w-5 h-5 text-[#27AE60]" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-[#1B4F72] mb-1">KI-gestützte Personalisierung</h4>
-                    <p className="text-gray-600">Empfehlungen basierend auf Interessen, Wetter, Tageszeit und bisherigem Verhalten</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#27AE60]/10 flex items-center justify-center">
-                    <Check className="w-5 h-5 text-[#27AE60]" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-[#1B4F72] mb-1">Gamification & Loyalty</h4>
-                    <p className="text-gray-600">Punkte sammeln, Achievements freischalten, exklusive Rewards von lokalen Partnern</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#27AE60]/10 flex items-center justify-center">
-                    <Check className="w-5 h-5 text-[#27AE60]" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-[#1B4F72] mb-1">Provisionsfrei für lokale Betriebe</h4>
-                    <p className="text-gray-600">Fixe monatliche Gebühr statt 15-30% Provision wie bei Booking & Co.</p>
-                  </div>
-                </div>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">KI-Concierge "Bosse"</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Stellen Sie Fragen in natürlicher Sprache: "Wo kann ich bei Regen mit 2 Kindern hin?" – Bosse berücksichtigt Wetter, Öffnungszeiten, Ihre bisherigen Vorlieben und Tide-Zeiten in Echtzeit.
+                </p>
               </div>
             </div>
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-[#1B4F72] via-[#27AE60] to-[#1B4F72] p-8 flex items-center justify-center shadow-2xl">
-                <div className="text-center text-white">
-                  <MapPin className="w-24 h-24 mx-auto mb-4 opacity-90" />
-                  <p className="text-lg font-semibold opacity-90">App Mockup</p>
-                  <p className="text-sm opacity-75">Interaktive Inselkarte</p>
+            <div className="flex gap-6">
+              <div className="flex-shrink-0">
+                <div className="w-16 h-16 bg-[#27AE60] rounded-2xl flex items-center justify-center">
+                  <Gift className="w-8 h-8 text-white" />
                 </div>
               </div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[#27AE60] rounded-3xl opacity-20 blur-2xl"></div>
-              <div className="absolute -top-6 -left-6 w-32 h-32 bg-[#1B4F72] rounded-3xl opacity-20 blur-2xl"></div>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Loyalty & Rewards</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Sammeln Sie Inselpunkte für Check-ins, Restaurant-Bewertungen und absolvierte Challenges. Lösen Sie sie ein für Rabatte bei Partnern oder exklusive Erlebnisse beim nächsten Besuch.
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-6">
+              <div className="flex-shrink-0">
+                <div className="w-16 h-16 bg-[#1B4F72] rounded-2xl flex items-center justify-center">
+                  <Map className="w-8 h-8 text-white" />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Hyperlokale Inselkarte</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Sehen Sie auf einen Blick: aktuelle Tide-Stände, Vogelschutz-Status, Fahrrad-Verfügbarkeit, Live-Auslastung an Stränden. Mit Offline-Modus für Touren im Naturschutzgebiet.
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-6">
+              <div className="flex-shrink-0">
+                <div className="w-16 h-16 bg-[#27AE60] rounded-2xl flex items-center justify-center">
+                  <Zap className="w-8 h-8 text-white" />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Gamification Challenges</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  "Entdecke alle 3 Leuchttürme", "Probiere 5 lokale Spezialitäten" – spielerische Missionen machen Ihren Urlaub zum Abenteuer und erhöhen die Aufenthaltsdauer messbar.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="features" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1B4F72] mb-4">
-              Features, die den Unterschied machen
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Alles, was Gäste brauchen — und Betriebe sich wünschen
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition border border-gray-100">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1B4F72] to-[#27AE60] flex items-center justify-center mb-4">
-                <MapPin className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-[#1B4F72] mb-2">
-                Interaktive Inselkarte
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Kategorien, Filter, Offline-Modus, Routenplanung und Echtzeit-Updates zu Events und Angeboten.
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition border border-gray-100">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1B4F72] to-[#27AE60] flex items-center justify-center mb-4">
-                <Trophy className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-[#1B4F72] mb-2">
-                Loyalty & Gamification
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Punkte für Besuche, Challenges, Leaderboards und exklusive Belohnungen von Partnerbetrieben.
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition border border-gray-100">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1B4F72] to-[#27AE60] flex items-center justify-center mb-4">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-[#1B4F72] mb-2">
-                KI-Concierge
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Persönliche Empfehlungen, Wetter-basierte Tipps und Chat-Support in natürlicher Sprache.
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition border border-gray-100">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1B4F72] to-[#27AE60] flex items-center justify-center mb-4">
-                <MessageSquare className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-lg font-bold text-[#1B4F72] mb-2">
-                Push-Benachrichtigungen
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Geo-basierte Angebote, Event-Reminder und personalisierte Nachrichten zur richtigen Zeit.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1B4F72] mb-4">
-              Was Gäste und Betriebe sagen
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Echte Erfahrungen aus der Testphase
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-sm border border-gray-100">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#1B4F72]">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl font-bold text-center text-white mb-16">
+            Das sagen erste Nutzer
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="flex gap-1 mb-4">
-                {[1,2,3,4,5].map((i) => (
+                {[1, 2, 3, 4, 5].map((i) => (
                   <Star key={i} className="w-5 h-5 fill-[#27AE60] text-[#27AE60]" />
                 ))}
               </div>
-              <p className="text-gray-700 mb-6 leading-relaxed">
-                „Endlich eine App, die mir zeigt, was ich auf Borkum wirklich erleben kann! Die KI-Empfehlungen haben mich zu Orten gebracht, die ich sonst nie gefunden hätte. Und die Punkte beim lokalen Bäcker zu sammeln macht richtig Spaß!"
+              <p className="text-white/90 text-lg leading-relaxed mb-6">
+                "Endlich keine 20 Tabs mehr im Browser! Die KI hat uns innerhalb von 30 Sekunden drei perfekte Restaurants für unser Budget vorgeschlagen – inklusive Kindermenü und aktueller Wartezeit."
               </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1B4F72] to-[#27AE60]"></div>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-[#27AE60] rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  SK
+                </div>
                 <div>
-                  <p className="font-semibold text-[#1B4F72]">Sarah M.</p>
-                  <p className="text-sm text-gray-600">Touristin aus Hamburg</p>
+                  <div className="text-white font-semibold">Sarah K.</div>
+                  <div className="text-white/70">Familie aus Hamburg, 2. Borkum-Besuch</div>
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-sm border border-gray-100">
+            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="flex gap-1 mb-4">
-                {[1,2,3,4,5].map((i) => (
+                {[1, 2, 3, 4, 5].map((i) => (
                   <Star key={i} className="w-5 h-5 fill-[#27AE60] text-[#27AE60]" />
                 ))}
               </div>
-              <p className="text-gray-700 mb-6 leading-relaxed">
-                „Als Betreiber eines kleinen Cafés hatte ich es satt, 20% Provision an Booking-Plattformen zu zahlen. Mit BLT Borkum erreiche ich Gäste direkt und kann exklusive Angebote ausspielen. Die Laufkundschaft hat sich verdoppelt!"
+              <p className="text-white/90 text-lg leading-relaxed mb-6">
+                "Die Challenges sind genial! Wir haben Orte entdeckt, die wir sonst nie gesehen hätten. Die 50 Inselpunkte vom letzten Mal haben uns dieses Jahr einen Rabatt bei der Wattwanderung gebracht."
               </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1B4F72] to-[#27AE60]"></div>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-[#27AE60] rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  MT
+                </div>
                 <div>
-                  <p className="font-semibold text-[#1B4F72]">Thomas K.</p>
-                  <p className="text-sm text-gray-600">Café-Besitzer, Borkum</p>
+                  <div className="text-white font-semibold">Michael T.</div>
+                  <div className="text-white/70">Stamm-Gast aus NRW, 8. Besuch</div>
                 </div>
               </div>
             </div>
@@ -281,119 +273,140 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="pricing" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1B4F72] mb-4">
-              Transparente Preise für jeden Bedarf
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Keine versteckten Kosten, keine Provisionen — nur faire monatliche Preise
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 hover:shadow-lg transition">
-              <h3 className="text-2xl font-bold text-[#1B4F72] mb-2">Starter</h3>
-              <p className="text-gray-600 mb-6">Perfekt für kleine Betriebe</p>
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl font-bold text-center text-[#1B4F72] mb-4">
+            Transparente Preise
+          </h2>
+          <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
+            Wählen Sie das Modell, das zu Ihrer Destination passt
+          </p>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-2xl border-2 border-gray-200 hover:border-[#1B4F72] transition-colors">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Starter</h3>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-[#1B4F72]">49€</span>
+                <span className="text-4xl font-bold text-[#1B4F72]">2.900€</span>
                 <span className="text-gray-600">/Monat</span>
               </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-[#27AE60] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Profil auf der Inselkarte</span>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-[#27AE60] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <span className="text-gray-700">Basis KI-Concierge</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-[#27AE60] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Basis-Statistiken</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-[#27AE60] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <span className="text-gray-700">Inselkarte mit Echtzeit-Daten</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-[#27AE60] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Bis zu 3 Angebote/Monat</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-[#27AE60] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <span className="text-gray-700">Bis 5 Partner-Integrationen</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-[#27AE60] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Email-Support</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-[#27AE60] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <span className="text-gray-700">Basis-Analytics Dashboard</span>
                 </li>
               </ul>
-              <button className="w-full py-3 px-6 bg-gray-100 text-[#1B4F72] font-semibold rounded-xl hover:bg-gray-200 transition">
-                Starten
+              <button className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                Angebot anfordern
               </button>
             </div>
-            <div className="bg-gradient-to-br from-[#1B4F72] to-[#27AE60] rounded-2xl p-8 shadow-xl border-2 border-[#27AE60] relative transform md:scale-105">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#27AE60] text-white px-4 py-1 rounded-full text-sm font-semibold">
-                Beliebteste
+            <div className="bg-gradient-to-br from-[#1B4F72] to-[#27AE60] p-8 rounded-2xl border-2 border-[#27AE60] shadow-xl transform md:scale-105">
+              <div className="bg-[#27AE60] text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-4">
+                EMPFOHLEN
               </div>
               <h3 className="text-2xl font-bold text-white mb-2">Pro</h3>
-              <p className="text-white/90 mb-6">Für wachsende Betriebe</p>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-white">149€</span>
+                <span className="text-4xl font-bold text-white">5.900€</span>
                 <span className="text-white/80">/Monat</span>
               </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-[#27AE60] text-xs">✓</span>
+                  </div>
                   <span className="text-white">Alles aus Starter</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-white">Unbegrenzte Angebote</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-[#27AE60] text-xs">✓</span>
+                  </div>
+                  <span className="text-white">Gamification & Challenges</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-white">Push-Benachrichtigungen</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-[#27AE60] text-xs">✓</span>
+                  </div>
+                  <span className="text-white">Loyalty-System mit Rewards</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-white">Erweiterte Analytics</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-[#27AE60] text-xs">✓</span>
+                  </div>
+                  <span className="text-white">Unbegrenzte Partner</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-white">Loyalty-Integration</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-[#27AE60] text-xs">✓</span>
+                  </div>
+                  <span className="text-white">Erweiterte B2B-Analytics</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-white">Prioritäts-Support</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-[#27AE60] text-xs">✓</span>
+                  </div>
+                  <span className="text-white">White-Label Branding</span>
                 </li>
               </ul>
-              <button className="w-full py-3 px-6 bg-white text-[#1B4F72] font-semibold rounded-xl hover:bg-gray-50 transition shadow-lg">
+              <button className="w-full bg-white text-[#1B4F72] py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                 Jetzt starten
               </button>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 hover:shadow-lg transition">
-              <h3 className="text-2xl font-bold text-[#1B4F72] mb-2">Enterprise</h3>
-              <p className="text-gray-600 mb-6">Für große Organisationen</p>
+            <div className="bg-white p-8 rounded-2xl border-2 border-gray-200 hover:border-[#1B4F72] transition-colors">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-[#1B4F72]">Custom</span>
+                <span className="text-4xl font-bold text-[#1B4F72]">Individuell</span>
               </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-[#27AE60] flex-shrink-0 mt-0.5" />
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-[#27AE60] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
                   <span className="text-gray-700">Alles aus Pro</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-[#27AE60] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">White-Label Lösung</span>
-                </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-[#27AE60] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">API-Zugang</span>
-                </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-[#27AE60] flex-shrink-0 mt-0.5" />
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-[#27AE60] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
                   <span className="text-gray-700">Dedizierter Account Manager</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-[#27AE60] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">Custom Features</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-[#27AE60] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <span className="text-gray-700">Custom Feature-Entwicklung</span>
                 </li>
-                <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-[#27AE60] flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">SLA & 24/7 Support</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-[#27AE60] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <span className="text-gray-700">API-Zugang für Drittsysteme</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-[#27AE60] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs">✓</span>
+                  </div>
+                  <span className="text-gray-700">SLA 99,9% Uptime</span>
                 </li>
               </ul>
-              <button className="w-full py-3 px-6 bg-gray-100 text-[#1B4F72] font-semibold rounded-xl hover:bg-gray-200 transition">
+              <button className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
                 Kontakt aufnehmen
               </button>
             </div>
@@ -401,14 +414,36 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="cta" className="py-20 bg-gradient-to-br from-[#1B4F72] to-[#27AE60] text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full filter blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full filter blur-3xl"></div>
-        </div>
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Bereit, Ihre Gäste zu begeistern?
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#1B4F72] to-[#27AE60]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6">
+            Bereit für mehr zufriedene Gäste?
           </h2>
-          <p className="text-xl mb-8 text-white/90">
-            Starten Sie noch heute und transformieren Sie das Borkum-
+          <p className="text-xl text-white/90 mb-8">
+            Werden Sie Teil der digitalen Tourismus-Revolution. Demo in 48h verfügbar.
+          </p>
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="ihre.email@borkum.de"
+              required
+              className="flex-1 px-6 py-4 rounded-lg text-gray-900 text-lg focus:outline-none focus:ring-4 focus:ring-white/50"
+            />
+            <button
+              type="submit"
+              className="bg-white text-[#1B4F72] px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors whitespace-nowrap"
+            >
+              Demo buchen
+            </button>
+          </form>
+          {submitted && (
+            <div className="mt-4 text-white font-semibold">
+              ✓ Perfekt! Wir melden uns innerhalb von 24 Stunden.
+            </div>
+          )}
+        </div>
+      </section>
+
+      <footer className="
